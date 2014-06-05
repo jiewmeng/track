@@ -91,6 +91,19 @@ module.exports = (grunt) ->
 					baseUrl: "dist/js"
 					name: "app"
 					out: "dist/js/app-all.js"
+					optimize: "none"
+		imagemin:
+			images:
+				files: [{
+					expand: true
+					cwd: "src/assets/img"
+					src: ["**/*.{jpg,jpeg,png,gif}"]
+					dest: "src/assets/img"
+				}]
+
+		clean:
+			dist:
+				src: ["dist"]
 
 	})
 
@@ -101,7 +114,9 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks('grunt-contrib-watch')
 	grunt.loadNpmTasks('grunt-contrib-connect')
 	grunt.loadNpmTasks('grunt-contrib-requirejs')
+	grunt.loadNpmTasks('grunt-contrib-imagemin')
+	grunt.loadNpmTasks('grunt-contrib-clean')
 
 	# the task you run for development
-	grunt.registerTask("build", ["copy", "coffee", "stylus", "jade"])
-	grunt.registerTask("server", ["build", "connect", "watch"])
+	grunt.registerTask("build", ["copy", "coffee", "stylus", "jade", "imagemin"])
+	grunt.registerTask("server", ["clean", "build", "connect", "watch"])
