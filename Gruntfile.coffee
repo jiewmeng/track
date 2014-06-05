@@ -10,13 +10,22 @@ module.exports = (grunt) ->
 					dest: "dist"
 				}]
 			# copy all library (bower_components) files into respective dist folders 
-			vendor:
+			libs:
 				files:
-					"dist/vendor/js/require.js": "bower_components/requirejs/require.js"
-					"dist/vendor/js/underscore.js": "bower_components/underscore/underscore.js"
-					"dist/vendor/js/jquery.js": "bower_components/jquery2/jquery.js"
-					"dist/vendor/js/backbone.js": "bower_components/backbone/backbone.js"
-					"dist/vendor/js/backbone.marionette.js": "bower_components/marionette/backbone.marionette.js"
+					"dist/js/libs/require.js": "bower_components/requirejs/require.js"
+					"dist/js/libs/underscore.js": "bower_components/underscore/underscore.js"
+					"dist/js/libs/jquery.js": "bower_components/jquery2/jquery.js"
+					"dist/js/libs/backbone.js": "bower_components/backbone/backbone.js"
+					"dist/js/libs/backbone.babysitter.js": "bower_components/backbone.babysitter/lib/backbone.babysitter.js"
+					"dist/js/libs/backbone.wreqr.js": "bower_components/backbone.wreqr/lib/backbone.wreqr.js"
+					"dist/js/libs/marionette.js": "bower_components/marionette/lib/core/amd/backbone.marionette.js"
+					"dist/css/libs/bootstrap.css": "bower_components/bootstrap/dist/css/bootstrap.css"
+					"dist/css/libs/bootstrap.theme.css": "bower_components/bootstrap/dist/css/bootstrap.theme.css"
+					"dist/css/fonts/glyphicons-halflings-regular.eot": "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot"
+					"dist/css/fonts/glyphicons-halflings-regular.svg": "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg"
+					"dist/css/fonts/glyphicons-halflings-regular.ttf": "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf"
+					"dist/css/fonts/glyphicons-halflings-regular.woff": "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff"
+					"dist/js/libs/bootstrap.js": "bower_components/bootstrap/dist/js/bootstrap.js"
 
 		coffee:
 			# compile CoffeeScript into dist (multiple files)
@@ -77,7 +86,7 @@ module.exports = (grunt) ->
 			# watch and copy bower components
 			bower_components:
 				files: "bower_components"
-				tasks: ["copy:vendor"]
+				tasks: ["copy:libs"]
 
 		connect:
 			server:
@@ -92,6 +101,34 @@ module.exports = (grunt) ->
 					name: "app"
 					out: "dist/js/app-all.js"
 					optimize: "none"
+					shim:
+						jquery:
+							exports: "jQuery"
+						bootstrap:
+							deps: ["jquery"]
+						underscore:
+							exports: "_"
+						backbone:
+							deps: [
+								"underscore",
+								"jquery"
+							]
+							exports: "Backbone"
+						marionette:
+							deps: [
+								"backbone",
+								"backbone.babysitter",
+								"backbone.wreqr"
+							]
+							exports: "Marionette"
+					paths:
+						jquery: "libs/jquery"
+						bootstrap: "libs/bootstrap"
+						underscore: "libs/underscore"
+						backbone: "libs/backbone"
+						"backbone.babysitter": "libs/backbone.babysitter"
+						"backbone.wreqr": "libs/backbone.wreqr"
+						marionette: "libs/marionette"
 		imagemin:
 			images:
 				files: [{
@@ -105,6 +142,15 @@ module.exports = (grunt) ->
 			dist:
 				src: ["dist"]
 
+		concat:
+			css:
+				src: [
+					"dist/css/libs/bootstrap.css"
+					"dist/css/libs/bootstrap-theme.css"
+					"dist/css/app.css"
+				]
+				dest: "dist/css/app-all.css"
+
 	})
 
 	grunt.loadNpmTasks('grunt-contrib-copy')
@@ -116,7 +162,8 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks('grunt-contrib-requirejs')
 	grunt.loadNpmTasks('grunt-contrib-imagemin')
 	grunt.loadNpmTasks('grunt-contrib-clean')
+	grunt.loadNpmTasks('grunt-contrib-concat')
 
 	# the task you run for development
-	grunt.registerTask("build", ["copy", "coffee", "stylus", "jade", "imagemin"])
+	grunt.registerTask("build", ["copy", "coffee", "stylus", "jade", "concat", "requirejs", "imagemin"])
 	grunt.registerTask("server", ["clean", "build", "connect", "watch"])
