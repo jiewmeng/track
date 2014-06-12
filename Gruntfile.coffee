@@ -21,11 +21,18 @@ module.exports = (grunt) ->
 					"dist/js/libs/marionette.js": "bower_components/marionette/lib/core/amd/backbone.marionette.js"
 					"dist/css/libs/bootstrap.css": "bower_components/bootstrap/dist/css/bootstrap.css"
 					"dist/css/libs/bootstrap.theme.css": "bower_components/bootstrap/dist/css/bootstrap.theme.css"
-					"dist/css/fonts/glyphicons-halflings-regular.eot": "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot"
-					"dist/css/fonts/glyphicons-halflings-regular.svg": "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg"
-					"dist/css/fonts/glyphicons-halflings-regular.ttf": "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf"
-					"dist/css/fonts/glyphicons-halflings-regular.woff": "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff"
+					"dist/fonts/glyphicons-halflings-regular.eot": "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot"
+					"dist/fonts/glyphicons-halflings-regular.svg": "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg"
+					"dist/fonts/glyphicons-halflings-regular.ttf": "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf"
+					"dist/fonts/glyphicons-halflings-regular.woff": "bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff"
 					"dist/js/libs/bootstrap.js": "bower_components/bootstrap/dist/js/bootstrap.js"
+					"dist/fonts/FontAwesome.otf": "bower_components/fontawesome/fonts/FontAwesome.otf"
+					"dist/fonts/fontawesome-webfont.eot": "bower_components/fontawesome/fonts/fontawesome-webfont.eot"
+					"dist/fonts/fontawesome-webfont.svg": "bower_components/fontawesome/fonts/fontawesome-webfont.svg"
+					"dist/fonts/fontawesome-webfont.ttf": "bower_components/fontawesome/fonts/fontawesome-webfont.ttf"
+					"dist/fonts/fontawesome-webfont.woff": "bower_components/fontawesome/fonts/fontawesome-webfont.woff"
+					"dist/css/libs/font-awesome.css": "bower_components/fontawesome/css/font-awesome.css"
+
 
 		coffee:
 			# compile CoffeeScript into dist (multiple files)
@@ -121,6 +128,8 @@ module.exports = (grunt) ->
 								"backbone.wreqr"
 							]
 							exports: "Marionette"
+						dropbox: 
+							exports: "Dropbox"
 					paths:
 						jquery: "libs/jquery"
 						bootstrap: "libs/bootstrap"
@@ -129,6 +138,7 @@ module.exports = (grunt) ->
 						"backbone.babysitter": "libs/backbone.babysitter"
 						"backbone.wreqr": "libs/backbone.wreqr"
 						marionette: "libs/marionette"
+						dropbox: "libs/dropbox-datastores-1.0.1"
 		imagemin:
 			images:
 				files: [{
@@ -147,6 +157,7 @@ module.exports = (grunt) ->
 				src: [
 					"dist/css/libs/bootstrap.css"
 					"dist/css/libs/bootstrap-theme.css"
+					"dist/css/libs/font-awesome.css"
 					"dist/css/app.css"
 				]
 				dest: "dist/css/app-all.css"
