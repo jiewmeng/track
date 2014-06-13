@@ -1,4 +1,7 @@
-require ["dropbox", "jquery"], (Dropbox, $) ->
+require ["dropbox", "jquery", "initMarionette", "views/AppLayout"], (Dropbox, $, initMarionette, AppLayout) ->
+
+	initMarionette()
+
 	dropboxClient = new Dropbox.Client
 		key: "qzg57uoll1mt4p4"
 	dropboxClient.authenticate {
@@ -9,5 +12,9 @@ require ["dropbox", "jquery"], (Dropbox, $) ->
 
 	$(".btn-login-dropbox").on "click", ->
 		dropboxClient.authenticate()
+
+	layout = new AppLayout()
+	layout.render()
+	console.log(layout.el)
 
 	

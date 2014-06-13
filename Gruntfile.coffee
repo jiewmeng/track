@@ -32,6 +32,7 @@ module.exports = (grunt) ->
 					"dist/fonts/fontawesome-webfont.ttf": "bower_components/fontawesome/fonts/fontawesome-webfont.ttf"
 					"dist/fonts/fontawesome-webfont.woff": "bower_components/fontawesome/fonts/fontawesome-webfont.woff"
 					"dist/css/libs/font-awesome.css": "bower_components/fontawesome/css/font-awesome.css"
+					"dist/js/libs/runtime.js": "bower_components/jade/runtime.js"
 
 
 		coffee:
@@ -42,7 +43,6 @@ module.exports = (grunt) ->
 					join: false # r.js used to do this
 				files: [{
 					expand: true
-					flatten: true
 					cwd: "src/coffee"
 					src: ["**/*.coffee"]
 					dest: "dist/js"
@@ -68,6 +68,19 @@ module.exports = (grunt) ->
 					src: ["*.jade"]
 					dest: "dist"
 					ext: ".html"
+				}]
+			# pre-compile client templates (for use with AMD)
+			clientTemplates:
+				options:
+					client: true
+					amd: true
+					namespace: false
+				files: [{
+					expand: true
+					cwd: "src/jade/templates"
+					src: ["**/*.jade"]
+					dest: "dist/templates"
+					ext: ".js"
 				}]
 
 		watch:
@@ -139,6 +152,8 @@ module.exports = (grunt) ->
 						"backbone.wreqr": "libs/backbone.wreqr"
 						marionette: "libs/marionette"
 						dropbox: "libs/dropbox-datastores-1.0.1"
+						templates: "../templates"
+						jade: "libs/runtime"
 		imagemin:
 			images:
 				files: [{
