@@ -1,6 +1,29 @@
-require ["dropbox", "jquery", "initMarionette", "views/AppLayout"], (Dropbox, $, initMarionette, AppLayout) ->
+require [
+		"dropbox"
+		"jquery"
+		"initMarionette"
+		"TrackApp"
+		"views/UserFunctionsView"
+		"views/LandingPageView"
+		"bootstrap"
+	], (
+		Dropbox
+		$
+		initMarionette
+		TrackApp
+		UserFunctionsView
+		LandingPageView
+	) ->
 
 	initMarionette()
+
+	trackApp = TrackApp.getInstance()
+
+	trackApp.addRegions
+		userFunctionsRegion: "#userFunctions",
+		contentRegion: "#content"
+	trackApp.userFunctionsRegion.show(new UserFunctionsView())
+	trackApp.contentRegion.show(new LandingPageView())
 
 	dropboxClient = new Dropbox.Client
 		key: "qzg57uoll1mt4p4"
@@ -12,9 +35,4 @@ require ["dropbox", "jquery", "initMarionette", "views/AppLayout"], (Dropbox, $,
 
 	$(".btn-login-dropbox").on "click", ->
 		dropboxClient.authenticate()
-
-	layout = new AppLayout()
-	layout.render()
-	console.log(layout.el)
-
 	

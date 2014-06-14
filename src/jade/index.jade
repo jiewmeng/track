@@ -15,59 +15,7 @@ html
 						span.icon-bar
 					a.navbar-brand(href="#") TRACK
 
-				.navbar-collapse.collapse#mainnav
-					ul.nav.navbar-nav.navbar-right
-						li
-							div
-								a.btn-login-dropbox.btn.navbar-btn.btn-primary.btn-sm.btn-icon-text(href="#") 
-									i.fa.fa-dropbox 
-									| Login with Dropbox
+				#mainnav.navbar-collapse.collapse
+					ul#userFunctions.nav.navbar-nav.navbar-right
 
-		.container
-			.row
-				.col-sm-12
-					.jumbotron
-						h1 Welcome to TRACK
-						p A simple expences tracking app. Start by logging into Dropbox
-						a.btn-login-dropbox.btn.btn-primary.btn-lg.btn-icon-text
-							i.fa.fa-dropbox 
-							| Login with Dropbox
-
-			.row
-				.col-sm-4
-					h3 
-
-						i.fa.fa-dropbox.pull-right 
-						| Data stored on Dropbox
-
-					p 
-						| Your data is never stored on any of TRACK's servers. In fact, its designed to be hosted on a platform that is trusted by most, for example, Dropbox/GitHub. Currently, the site is hosted on 
-						a(href="https://dl.dropboxusercontent.com/spa/pjlfdak1tmznswp/powered_by.js/public/index.html") Dropbox's Static Web App
-						|  platform. And your data, persisted using 
-						a(href="https://www.dropbox.com/developers/datastore") Dropbox Datastore API
-					
-				.col-sm-4
-					h3
-						i.fa.fa-mobile.pull-right
-						| Works across all devices
-
-					p TRACK is designed to work across all devices (with responsive web design). Afterall, most likely, you will be adding your expenses as you spend them, on your smart phone. 
-
-				.col-sm-4
-					h3
-						i.fa.fa-github-alt.pull-right
-						| Open Source on GitHub
-					p Source code can be obtained from GitHub. Pull requests, bug reports and suggestions/feature requests welcomed.
-
-			.row
-				.col-sm-6
-					h3 
-						i.fa.fa-dollar.pull-right
-						| Easily keep track of your expences
-					p Quickly track your expenses as you spend from your smart phone. At least, take a photo of your reciept and enter the details later on. 
-
-				.col-sm-6
-					h3 
-						i.fa.fa-bar-chart-o.pull-right
-						| Visualize and analyze them
-					p What have you been spending most on recently? Have you been spending too much in a certain category? What is your spending patterns like? For a certain item, how much did it cost last time? 
+		#content.container

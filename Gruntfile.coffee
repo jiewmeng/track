@@ -94,7 +94,7 @@ module.exports = (grunt) ->
 			# watch and compile Stylus files
 			stylus:
 				files: "src/stylus/**/*.styl"
-				tasks: ["stylus"]
+				tasks: ["stylus", "concat:css"]
 			# watch and compile Jade files
 			jade:
 				files: "src/jade/**/*.jade"
